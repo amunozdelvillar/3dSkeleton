@@ -47,9 +47,18 @@
             stats.domElement.style.zIndex = 100;
             container.appendChild(stats.domElement);
             //LIGHT
+            //added directional lighting to the model
+            var ambientLight = new THREE.AmbientLight(0x404040);
+            scene.add(ambientLight);
+            var directionalLight = new THREE.DirectionalLight(0xffffff);
+            directionalLight.position.set(1, 1, 1).normalize();
+            scene.add(directionalLight);
+
+
             var light = new THREE.PointLight(0xffffff);
             light.position.set(0,250,0);
             scene.add(light);
+
             //FLOOR
             var floorTexture = THREE.ImageUtils.loadTexture('resources/sand-512.jpg');
             floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
@@ -113,7 +122,7 @@
         }
 
         function update(){
-            MovingCube = mesh.children[3];
+            MovingCube = mesh.children[5];
 
             var delta = clock.getDelta();//seconds
             var moveDistance = 200 * delta;//200px per second
